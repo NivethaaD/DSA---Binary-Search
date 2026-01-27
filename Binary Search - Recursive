@@ -1,0 +1,15 @@
+class Solution:
+    def findElem(self, nums, low, high, target):
+        if low > high:
+            return -1
+        mid = (low + high)//2
+        if nums[mid] == target:
+            return mid
+        elif target < nums[mid]:
+            return self.findElem(nums,low,mid-1,target)
+        return self.findElem(nums, mid+1, high, target)
+
+    def search(self, nums: List[int], target: int) -> int:
+        low = 0
+        high = len(nums)-1
+        return self.findElem(nums,low,high,target)
