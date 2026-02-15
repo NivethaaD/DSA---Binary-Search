@@ -1,0 +1,41 @@
+class Solution:
+    def firstOccurance(self, nums, target):
+        l = 0
+        h = len(nums)-1
+        ind = -1
+
+        while l <= h:
+            m = (l+h)//2
+            if nums[m] == target:
+                ind = m
+                h = m - 1
+            elif nums[m] < target:
+                l = m + 1
+            else:
+                h = m - 1
+        return ind
+
+    def secondOccurance(self, nums, target):
+        l = 0
+        h = len(nums)-1
+        ind =-1
+
+        while l <= h:
+            m = (l+h)//2
+            if nums[m] == target:
+                ind = m
+                l = m + 1
+            elif nums[m] < target:
+                l = m + 1
+            else:
+                h = m - 1
+        return ind 
+
+
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        if len(nums) == 0:
+            return [-1,-1]
+        ans1 = self.firstOccurance(nums, target)
+        ans2 = self.secondOccurance(nums, target)
+
+        return [ans1,ans2]
