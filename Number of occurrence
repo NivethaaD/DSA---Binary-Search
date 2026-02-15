@@ -1,0 +1,16 @@
+class Solution:
+    def countFreq(self, arr, target):
+        d = dict()
+        for ele in arr:
+            if ele == target:
+                if ele not in d:
+                    d[ele] = 1
+                else:
+                    d[ele] = d[ele]+1
+        if target in d:
+            return d[target]
+            
+        return 0
+                
+                
+        
