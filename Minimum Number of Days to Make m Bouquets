@@ -1,0 +1,44 @@
+class Solution:
+    def check(self, maxi, bloomDay, m, k):
+        i = 0
+        j = 0
+        while j<len(bloomDay):
+            if m <= 0:
+                return maxi
+            
+            if bloomDay[j]>maxi:
+                lengthOfdays = j - i
+                
+                m -= lengthOfdays // k
+                i = j+1
+                j = i
+            else:
+                j = j + 1
+
+        
+        lengthOfdays = j - i
+        m -= lengthOfdays // k
+        if m <= 0:
+            return maxi
+
+        return -1
+
+
+    def minDays(self, bloomDay: List[int], m: int, k: int) -> int:
+        bs_set = set(bloomDay.copy())
+        bs = list(bs_set)
+        bs.sort()
+        print(bs)
+        l = 0
+        h = len(bs)-1
+        ans = -1
+        while l <= h:
+            mid = (l+h)//2
+            days = self.check(bs[mid],bloomDay,m,k)
+            if days == -1:
+                l = mid+1
+            else:
+                ans = days
+                h = mid-1
+        return ans
+        
