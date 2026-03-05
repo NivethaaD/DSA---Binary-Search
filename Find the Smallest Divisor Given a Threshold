@@ -1,0 +1,35 @@
+import math
+class Solution:
+    def check(self, nums, m):
+        sums = 0
+        for ele in nums:
+            sums = sums+(math.ceil(ele/m))
+        return sums
+    
+    def smallestDivisor(self, nums: List[int], threshold: int) -> int:
+        
+        res = 0
+        larg = float('-inf')
+
+        for ele in nums:
+            if ele > larg:
+                larg = ele
+
+
+        l = 1
+        h = larg
+
+        ans = 0
+
+        while l < h:
+            m = (l+h)//2
+            
+            res = self.check(nums,m)
+        
+            if res <= threshold:
+                h = m
+            else:
+                l = m + 1
+
+        return l
+
