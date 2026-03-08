@@ -1,0 +1,22 @@
+import math
+class Solution:
+    def check(self,piles,m):
+        sumVal = 0
+        for ele in piles:
+            sumVal = sumVal + math.ceil(ele/m)
+        return sumVal
+    
+    def minEatingSpeed(self, piles: List[int], hour: int) -> int:
+        l = 1
+        h = max(piles)
+        ans = 0
+
+        while l<=h:
+            m = (l+h)//2
+            if self.check(piles,m) <= hour:
+                ans = m
+                h = m-1
+            else:
+                l = m+1
+
+        return ans
