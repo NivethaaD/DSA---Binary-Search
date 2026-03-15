@@ -1,0 +1,31 @@
+class Solution:
+    def check(self, target, weights, days):
+        ans = 0
+        sum = 0
+        for i in range(0,len(weights)):
+            sum = sum + weights[i]
+            if sum > target:
+                ans = ans + 1
+                sum = weights[i]
+        
+        if sum > 0:
+            ans = ans + 1
+        
+        return ans
+    
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+        maxiShipWeight = 0
+    
+        
+        l = max(weights)
+        h = sum(weights)
+        ans = -1
+
+        while l <= h:
+            m = (l+h)//2
+            if self.check(m, weights, days) <= days:
+                h = m-1
+            else:
+                l = m+1
+                
+        return l
