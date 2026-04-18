@@ -1,0 +1,28 @@
+class Solution:
+    def maxElem(self, n, m, mat):
+        maxi = 0
+        row = -1
+        for i in range(0,n):
+            if mat[i][m] > maxi:
+                maxi = mat[i][m]
+                row = i
+        return row
+
+    def findPeakGrid(self, mat: List[List[int]]) -> List[int]:
+        n = len(mat)
+        m = len(mat[0])
+        l = 0 
+        h = m-1
+
+        while (l<=h):
+            mid = (l+h)//2
+            row = self.maxElem(n, mid, mat)
+            if ((mid==0 or mat[row][mid-1] < mat[row][mid]) and (mid==m-1 or mat[row][mid+1] < mat[row][mid])):
+                return [row, mid]
+            elif mid > 0 and mat[row][mid-1] > mat[row][mid]:
+                h = mid - 1
+            else:
+                l = mid + 1
+        
+        return [-1,-1]
+
